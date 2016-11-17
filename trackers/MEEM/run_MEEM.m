@@ -2,10 +2,7 @@ function results=run_MEEM(seq, res_path, bSaveImage)
 
 close all;
 
-x=seq.init_rect(1);
-y=seq.init_rect(2);
-w=seq.init_rect(3);
-h=seq.init_rect(4);
+
 addpath('./MEEM')
 %featureName kernelName param svmC svmBudgetSize searchRadius seed
 %featureName: raw haar histogram

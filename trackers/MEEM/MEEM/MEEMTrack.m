@@ -23,12 +23,9 @@
 
 function result = MEEMTrack(input, ext, show_img, init_rect, start_frame, end_frame)
 
-%addpath(genpath('.'));
-
 % parse input arguments
 D = dir(fullfile(input,['*.', ext]));
 file_list={D.name};
-
 if nargin < 4
     init_rect = -ones(1,4);
 end
@@ -46,13 +43,11 @@ global experts
 global config
 global finish % flag for determination by keystroke
 
-
 config.display = true;
 sampler = createSampler();
 svm_tracker = createSvmTracker();
 experts = {};
 finish = 0;
-
 
 timer = 0;
 result.res = nan(end_frame-start_frame+1,4);
@@ -68,7 +63,6 @@ end
 %    main loop
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 output = zeros(1,4);
-
 for frame_id = start_frame:end_frame
     if finish == 1
         break;
@@ -76,7 +70,6 @@ for frame_id = start_frame:end_frame
 
     if ~config.display
         clc
-        display(input);
         display(['frame: ',num2str(frame_id),'/',num2str(end_frame)]);
     end
     
@@ -102,25 +95,23 @@ for frame_id = start_frame:end_frame
         
         output = svm_tracker.output;
     end
-        
     %% compute ROI and scale image
     [I_scale]= getFrame2Compute(I_orig);
-    
+
     %% crop frame
     if frame_id == start_frame
         sampler.roi = rsz_rt(svm_tracker.output,size(I_scale),5*config.search_roi,false);
     else%if svm_tracker.confidence > config.svm_thresh
         sampler.roi = rsz_rt(output,size(I_scale),config.search_roi,true);
     end
+
     I_crop = I_scale(round(sampler.roi(2):sampler.roi(4)),round(sampler.roi(1):sampler.roi(3)),:);
-    
+
     %% compute feature images
     [BC F] = getFeatureRep(I_crop,config.hist_nbin);
-   
     %% tracking part
-    
     tic
-    
+
     if frame_id==start_frame
         initSampler(svm_tracker.output,BC,F,config.use_color);
         train_mask = (sampler.costs<config.thresh_p) | (sampler.costs>=config.thresh_n);
@@ -200,10 +191,12 @@ for frame_id = start_frame:end_frame
         else % clear update_count
             svm_tracker.update_count = 0;
         end
+        
 % toc
     end
 
     timer = timer + toc;
+
     if show_img
         pause(0.0001);
     end
@@ -214,6 +207,5 @@ end
 
 %% output restuls
 result.fps = result.len/timer;
-
 
 clearvars -global sampler svm_tracker experts config finish 
