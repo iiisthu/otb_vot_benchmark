@@ -3,14 +3,14 @@ clear
 clc
 warning off all;
 
-addpath('./util');
+addpath(('./util'));
 
-addpath(('../../vlfeat-0.9.20/toolbox'));
+addpath(('../lib/vlfeat-0.9.20/toolbox'));
 vl_setup
  
 addpath(('./rstEval'));
-addpath(['../trackers/VIVID_Tracker'])
-otb50 = '../data/otb100';
+addpath(['../trackers/VIVID_Tracker']);
+otb50 = '../../data/otb100';
 bm = otb50;
 seqs=configSeqs(bm);
 
@@ -18,7 +18,7 @@ trackers=configTrackers;
 
 shiftTypeSet = {'left','right','up','down','topLeft','topRight','bottomLeft','bottomRight','scale_8','scale_9','scale_11','scale_12'};
 
-evalType='SRE'; %'OPE','SRE','TRE'
+evalType='OPE'; %'OPE','SRE','TRE'
 
 diary(['./tmp/' evalType '.txt']);
 

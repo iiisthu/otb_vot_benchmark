@@ -97,7 +97,13 @@ end
 
 function l = lib_names(L_path)
     %LIB_NAMES  return library names
-    d = dir( fullfile(L_path,'libopencv_*.dylib') );
-    l = regexp({d.name}, 'lib(opencv_core.+)\.dylib|lib(opencv_imgproc.+)\.dylib|lib(opencv_highgui.+)\.dylib', 'tokens', 'once');
+    ext = '.so';
+    if ispc
+        ext = '.lib';
+    elif ismac
+        ext = '.dylib';
+    end
+    d = dir( fullfile([L_path,'libopencv_*',ext]) );
+    l = regexp({d.name}, fullfile(['lib(opencv_core.*)\',ext,'|lib(opencv_imgproc.*)\',ext,'|lib(opencv_highgui.*)\',ext]), 'tokens', 'once');
     l = [l{:}];
 end

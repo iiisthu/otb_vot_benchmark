@@ -59,7 +59,7 @@ plotDrawStyle10={   struct('color',[1,0,0],'lineStyle','-'),...
     struct('color',[0,162,232]/255,'lineStyle','-'),...%Turquoise
     };
 
-otb = '../data/otb100';
+otb = '../../data/otb100';
 bm = otb;
 seqs=configSeqs(bm);
 
@@ -90,8 +90,8 @@ for idxSeq=1:numSeq
         continue;
     end
     numAllSeq(idxSeq) = s.len;
-    if exist([attPath s.name '.txt'])
-        att(idxSeq,:)=load([attPath s.name '.txt']);
+    if exist([attPath lower(s.name)  '.txt'])
+        att(idxSeq,:)=load([attPath lower(s.name) '.txt']);
     else
         attr = {'IV','OPR','SV','OCC','DEF','MB','FM','IPR','OV','BC','LR'};
         cfg = strcat(s.path, '../cfg.mat');

@@ -6,3 +6,5 @@ bm_vot/workspace/run_*
 bm_vot/workspace/configuration.m
 bm_vot/workspace/tracker_*
 **/**/.DS_Store
+**/**/*.log
+**/**/*.mexa64

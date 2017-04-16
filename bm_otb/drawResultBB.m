@@ -5,12 +5,12 @@ warning off all;
 
 addpath('./util');
 
-pathRes = './results/results_OPE_CVPR13/';% The folder containing the tracking results
+pathRes = './results/results_OPE_OURS/';% The folder containing the tracking results
 pathDraw = './tmp/imgs/';% The folder that will stores the images with overlaid bounding box
 
 rstIdx = 1;
 
-otb50 = '../data/TB-50';
+otb50 = '../../data/otb100';
 bm = otb50;
 seqs=configSeqs(bm);
 trks=configTrackers;
