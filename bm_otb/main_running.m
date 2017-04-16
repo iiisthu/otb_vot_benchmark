@@ -18,14 +18,14 @@ trackers=configTrackers;
 
 shiftTypeSet = {'left','right','up','down','topLeft','topRight','bottomLeft','bottomRight','scale_8','scale_9','scale_11','scale_12'};
 
-evalType='OPE'; %'OPE','SRE','TRE'
+evalType='SRE'; %'OPE','SRE','TRE'
 
 diary(['./tmp/' evalType '.txt']);
 
 numSeq=length(seqs);
 numTrk=length(trackers);
 
-finalPath = ['./results/results_' evalType '_CVPR13/'];
+finalPath = ['./results/results_' evalType '_OURS/'];
 
 if ~exist(finalPath,'dir')
     mkdir(finalPath);

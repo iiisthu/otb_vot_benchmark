@@ -12,7 +12,7 @@ switch evalType
     case 'TRE'
         rpAll=['./results/results_TRE_CVPR13/'];
     case 'OPE'
-        rpAll=['./results/results_OPE_CVPR13/'];
+        rpAll=['./results/results_OPE_OURS/'];
 
 end
 
